@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import css from './feedback.module.css';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-const optionsKeys = Object.keys(options);
+  const optionsKeys = Object.keys(options);
 
   return (
     <div className={css.buttonList}>
       {optionsKeys.map(option => (
-        <button key={option} type="button" onClick={() => onLeaveFeedback(option)}>
+        <button
+          key={option}
+          type="button"
+          onClick={() => onLeaveFeedback(option)}
+        >
           {option}
         </button>
       ))}
@@ -17,7 +21,11 @@ const optionsKeys = Object.keys(options);
 };
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.object.isRequired,
+  options: PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }).isRequired,
   onLeaveFeedback: PropTypes.func.isRequired,
 };
 
